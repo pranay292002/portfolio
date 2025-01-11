@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import Particles from "@/components/ui/particles";
+import Navbar from "@/components/navbar/Navbar";
+import Loader from "@/components/loader/Loader";
+import { Suspense } from "react";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -12,6 +16,20 @@ const geistMono = localFont({
   variable: "--font-geist-mono",
   weight: "100 900",
 });
+
+const orbitron = localFont({
+  src: "./fonts/Orbitron-VariableFont_wght.ttf",
+  variable: "--font-orbitron",
+  weight: "100 900",
+});
+
+const deathStar = localFont({
+  src: "./fonts/DeathStar.otf",
+  variable: "--font-deathStar",
+  weight: "100 900",
+});
+
+
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -25,10 +43,22 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+      <body className={`${geistSans.variable} ${geistMono.variable} ${orbitron.variable} ${deathStar.variable} antialiased relative`} >
+
+        <div className="relative z-20 h-10 mb-1">
+          <Navbar />
+        </div>
+
+        <div className="relative z-10">{children}</div>
+        
+        <Particles
+          className="fixed top-0 w-full h-full z-0"
+          quantity={450}
+          ease={80}
+          color={"#ffffff"}
+          refresh
+        />
+
       </body>
     </html>
   );
